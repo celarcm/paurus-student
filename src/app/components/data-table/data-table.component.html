@@ -1,0 +1,46 @@
+<div id="list" class="table-container">
+  <p-table [columns]="cols" [value]="data" sortField="name" sortMode="single" [paginator]="true" [rows]="20"
+    dataKey="name">
+    <ng-template pTemplate="caption">
+      List of {{name | titlecase }}
+      <p-button class="btnAdd" label="ADD" (onClick)="addItem()" *ngIf="editable"></p-button>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{col.header}}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+        <th *ngIf="editable">
+          Edit/Delete
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-item let-editing="editing" let-ri="rowIndex">
+
+      <tr>
+        <ng-container *ngFor="let col of cols">
+          <ng-container *ngIf="col.field !== 'edit/delete'">
+            <td>
+              {{item[col.field]}}
+            </td>
+          </ng-container>
+        </ng-container>
+        
+        <td *ngIf="editable" style="text-align:center">
+          <p-button class="btnAdd" icon="pi pi-trash" class="ui-button-info" (onClick)="deleteItem(item.id)"></p-button>
+          &nbsp;&nbsp;&nbsp;
+          <button pButton type="button" icon="pi pi-pencil" class="ui-button-info" (click)="editItem(item)"></button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary">
+      There are {{data?.length}} {{name}}
+    </ng-template>
+
+  </p-table>
+</div>
+<todo-add *ngIf="displayAdd" (valueChange)='hideAdd($event)'></todo-add>
+<!-- <router-outlet></router-outlet> -->

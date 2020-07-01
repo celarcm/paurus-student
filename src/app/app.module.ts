@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Reactive Form
@@ -42,13 +43,14 @@ import { AuthService } from "./shared/services/auth.service";
   ],
   imports: [
     NgbModule,
-    BrowserModule,
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    ReactiveFormsModule,
     CustomPrimengModule
   ],
   providers: [AuthService],

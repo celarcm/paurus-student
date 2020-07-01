@@ -3,7 +3,7 @@
     dataKey="name">
     <ng-template pTemplate="caption">
       List of {{name | titlecase }}
-      <p-button class="btnAdd" label="ADD" (onClick)="addItem()" *ngIf="editable"></p-button>
+      <p-button class="btnAdd" label="ADD" routerLink="/student" *ngIf="editable"></p-button>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -31,7 +31,7 @@
         <td *ngIf="editable" style="text-align:center">
           <p-button class="btnAdd" icon="pi pi-trash" class="ui-button-info" (onClick)="deleteItem(item.id)"></p-button>
           &nbsp;&nbsp;&nbsp;
-          <button pButton type="button" icon="pi pi-pencil" class="ui-button-info" (click)="editItem(item)"></button>
+          <button pButton type="button" icon="pi pi-pencil" class="ui-button-info" [routerLink]="['/student/', item.id]"></button>
         </td>
       </tr>
     </ng-template>

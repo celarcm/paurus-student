@@ -14,7 +14,5 @@ export class AppComponent {
     public authService: AuthService,
     public router: Router,
     public ngZone: NgZone
-  ) { 
-    console.log(authService.isLoggedIn);
-  }
+  ) { }
 }

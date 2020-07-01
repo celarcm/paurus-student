@@ -1,0 +1,26 @@
+<div class="displayTable">
+  <div class="displayTableCell">
+
+    <div class="authBlock">
+      <h3>{{title}}</h3>
+      <div class="formGroup">
+        <input type="text" class="formControl" placeholder="Name" #userName required>
+      </div>
+
+      <div class="formGroup">
+        <input type="text" class="formControl" placeholder="Surname" #userSurname required>
+      </div>
+      <div class="formGroup">
+        <input type="text" class="formControl" placeholder="Course" #userCourses required>
+      </div>
+
+      <div class="formGroup">
+        <input type="button" class="btn btnPrimary" value="Create" (click)="createStudent(userName.value, userSurname.value, userCourses.value)">
+      </div>
+      <div class="formGroup">
+        <input type="button" class="btn btnPrimary" value="Cancel" routerLink="/student">
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Student } from '../models/student';
 import { Professor } from '../models/professor';
 import { Course } from '../models/course';
+import { generateUniqueId } from '../../shared/services/utils/idGenerator';
 
 @Injectable({
   providedIn: 'root'
@@ -126,7 +128,7 @@ export class StudentService {
     }
   ]
 
-  constructor() { }
+  constructor(private router: Router) { }
   getCourses(): Course[] {
     // Add students list dynamically
     this.courses.map(course => {
@@ -146,9 +148,13 @@ export class StudentService {
   getStudents(): Student[] {
     return this.students;
   }
-  addStudent(student: Student): Student[] {
+  getStudentById(id: number): Student {
+    return this.students.find(student => student.id === id);
+  }
+  addStudent(student: Student): void {
+    student.id = generateUniqueId();
     this.students.push(student);
-    return this.students;
+    this.router.navigate(['/overview']);
   }
   updateStudent(student: Student): Student[] {
     this.students = this.students.map((s: Student) => {
@@ -158,8 +164,8 @@ export class StudentService {
     })
     return this.students;
   }
-  filterStudent(student: Student): Student[] {
-    this.students = this.students.filter((s: Student) => s.id !== student.id);
-    return this.students;
+  deleteStudent(studentId: number): void {
+    this.students = this.students.filter(student => student.id !== studentId);
+    this.router.navigate(['/']);
   }
 }
